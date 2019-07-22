@@ -1,6 +1,6 @@
 {
     "name": "pika-plugin-legacy-browser",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "description": "A @pika/pack plugin: Adds a bundled IIFE distribution to your package, built to be flexible & run on legacy browsers.",
     "scripts": {
         "build": "pack build"

@@ -84,7 +84,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
 
     await result.write({
         file: writeToUmd,
-        format: "umd",
+        format: options.format || "iife",
         name: options.name,
         sourcemap: options.sourcemap || false,
         globals: options.globals || {}
