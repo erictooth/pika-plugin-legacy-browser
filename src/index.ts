@@ -12,7 +12,7 @@ import { rollup } from "rollup";
 
 export async function beforeBuild({ options }: BuilderOptions) {
     if (!options.name) {
-        throw new MessageError('A "name" option is required for UMD builds.');
+        throw new MessageError('A "name" option is required for IIFE and UMD builds.');
     }
 }
 
@@ -32,11 +32,11 @@ export async function beforeJob({ out }: BuilderOptions) {
 }
 
 export function manifest(manifest) {
-    manifest["umd:main"] = "dist-umd/index.bundled.js";
+    manifest["browser"] = "dist-browser/index.js";
 }
 
 export async function build({ out, options, reporter }: BuilderOptions): Promise<void> {
-    const writeToUmd = path.join(out, "dist-umd", "index.bundled.js");
+    const writePath = path.join(out, "dist-browser", "index.js");
 
     const result = await rollup({
         input: path.join(out, "dist-src/index.js"),
@@ -83,12 +83,12 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
     });
 
     await result.write({
-        file: writeToUmd,
+        file: writePath,
         format: options.format || "iife",
         name: options.name,
         sourcemap: options.sourcemap || false,
         globals: options.globals || {}
     });
 
-    reporter.created(writeToUmd);
+    reporter.created(writePath);
 }
