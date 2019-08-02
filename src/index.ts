@@ -2,6 +2,7 @@ import rollupCommonJs from "rollup-plugin-commonjs";
 import rollupJson from "rollup-plugin-json";
 import rollupNodeResolve from "rollup-plugin-node-resolve";
 import rollupBabel from "rollup-plugin-babel";
+import { terser as rollupTerser } from "rollup-plugin-terser";
 import rollupSourcemaps from "rollup-plugin-sourcemaps";
 import babelPresetEnv from "@babel/preset-env";
 import babelPluginDefine from "babel-plugin-transform-define";
@@ -77,6 +78,9 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                     ]
                 ]
             }),
+            options.minify !== false
+                ? rollupTerser(typeof options.minify === "object" ? options.minify : undefined)
+                : undefined,
             rollupSourcemaps()
         ],
         external: options.external
