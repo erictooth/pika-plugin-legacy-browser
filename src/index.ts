@@ -32,10 +32,6 @@ export async function beforeJob({ out }: BuilderOptions) {
     }
 }
 
-export function manifest(manifest) {
-    manifest["browser"] = "dist-browser/index.js";
-}
-
 export async function build({ out, options, reporter }: BuilderOptions): Promise<void> {
     const writePath = path.join(out, "dist-browser", "index.js");
 
