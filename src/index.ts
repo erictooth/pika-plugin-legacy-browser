@@ -1,6 +1,6 @@
 import rollupCommonJs from "rollup-plugin-commonjs";
-import rollupJson from "rollup-plugin-json";
-import rollupNodeResolve from "rollup-plugin-node-resolve";
+import rollupJson from "@rollup/plugin-json";
+import rollupNodeResolve from "@rollup/plugin-node-resolve";
 import rollupBabel from "rollup-plugin-babel";
 import { terser as rollupTerser } from "rollup-plugin-terser";
 import rollupSourcemaps from "rollup-plugin-sourcemaps";
@@ -38,18 +38,23 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
     const result = await rollup({
         input: path.join(out, "dist-src/index.js"),
         plugins: [
+            rollupJson({
+                include: [
+                    "node_modules/**",
+                    "**/*.json"
+                ],
+                compact: true,
+                indent: "\t",
+                namedExports: true,
+            }),
             rollupNodeResolve({
                 preferBuiltins: true,
-                mainFields: ["module", "jsnext", "main", "browser"]
+                mainFields: ["module", "jsnext", "main", "browser"],
             }),
             rollupCommonJs({
                 include: "node_modules/**",
                 sourceMap: !!options.sourcemap,
-                namedExports: options.namedExports
-            }),
-            rollupJson({
-                include: "node_modules/**",
-                compact: true
+                namedExports: options.namedExports,
             }),
             rollupBabel({
                 exclude: "",
@@ -61,25 +66,25 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                     [
                         babelPresetEnv,
                         {
-                            spec: true
-                        }
-                    ]
+                            spec: true,
+                        },
+                    ],
                 ],
                 plugins: [
                     [
                         babelPluginDefine,
                         {
-                            "process.env.NODE_ENV": process.env.NODE_ENV
-                        }
-                    ]
-                ]
+                            "process.env.NODE_ENV": process.env.NODE_ENV,
+                        },
+                    ],
+                ],
             }),
             options.minify !== false
                 ? rollupTerser(typeof options.minify === "object" ? options.minify : undefined)
                 : undefined,
-            rollupSourcemaps()
+            rollupSourcemaps(),
         ],
-        external: options.external
+        external: options.external,
     });
 
     await result.write({
@@ -87,7 +92,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
         format: options.format || "iife",
         name: options.name,
         sourcemap: options.sourcemap || false,
-        globals: options.globals || {}
+        globals: options.globals || {},
     });
 
     reporter.created(writePath);
