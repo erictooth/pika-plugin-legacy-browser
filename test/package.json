@@ -1,0 +1,27 @@
+{
+    "name": "test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+        "build": "rm -rf pkg && ../node_modules/.bin/pika-pack build",
+        "test": "npm run build && node assert.js"
+    },
+    "@pika/pack": {
+        "pipeline": [
+            [
+                "@pika/plugin-ts-standard-pkg"
+            ],
+            [
+                "../pkg",
+                {
+                    "name": "Demo"
+                }
+            ]
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
