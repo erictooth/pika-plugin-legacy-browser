@@ -18,7 +18,7 @@ jobs:
           node-version: 12
       - name: npm install
         run: npm i
-      - name: tests
-        run: npm run test
       - name: build succeeds
         run: npm run build
+      - name: tests
+        run: npm run test
