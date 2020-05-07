@@ -36,7 +36,7 @@ Like other pika plugins, just add to your pipeline after `@pika/plugin-standard-
 | Option       | Values         | Required | Description                                                                                  |
 |--------------|----------------|----------|----------------------------------------------------------------------------------------------|
 | name         |                | yes      | Give your UMD or IIFE a name                                                                 |
-| format       | "iife" | "umd" | no       | **Default:** "iife". Set the desired format.                                                 |
+| format       | "iife" \| "umd" | no       | **Default:** "iife". Set the desired format.                                                 |
 | sourcemap    | boolean        | no       | Set true to enable sourcemaps                                                                |
 | globals      | string[]       | no       | [Specify globals](https://rollupjs.org/guide/en/#core-functionality) used by your project.   |
 | external     | string[]       | no       | [Specify externals](https://rollupjs.org/guide/en/#core-functionality) used by your project. |
