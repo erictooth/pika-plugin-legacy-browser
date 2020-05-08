@@ -34,17 +34,14 @@ export async function beforeJob({ out }: BuilderOptions) {
 
 export async function build({ out, options, reporter }: BuilderOptions): Promise<void> {
     const writePath = path.join(out, "dist-browser", "index.js");
-    
+
     const babelOptions = options.babel || {};
 
     const result = await rollup({
         input: path.join(out, "dist-src/index.js"),
         plugins: [
             rollupJson({
-                include: [
-                    "node_modules/**",
-                    "**/*.json"
-                ],
+                include: ["node_modules/**", "**/*.json"],
                 compact: true,
                 indent: "\t",
                 namedExports: true,
@@ -71,7 +68,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                             spec: true,
                         },
                     ],
-                    ...(babelOptions.presets || [])
+                    ...(babelOptions.presets || []),
                 ],
                 plugins: [
                     [
@@ -80,7 +77,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                             "process.env.NODE_ENV": process.env.NODE_ENV,
                         },
                     ],
-                    (...babelOptions.plugins || [])
+                    ...(babelOptions.plugins || []),
                 ],
             }),
             options.minify !== false
