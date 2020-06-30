@@ -51,7 +51,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                 mainFields: ["module", "jsnext", "main", "browser"],
             }),
             rollupCommonJs({
-                include: "node_modules/**",
+                include: /node_modules/,
                 sourceMap: !!options.sourcemap,
                 namedExports: options.namedExports,
             }),
