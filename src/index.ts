@@ -66,6 +66,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                         babelPresetEnv,
                         {
                             spec: true,
+                            ...babelOptions.presetEnvOptions,
                         },
                     ],
                     ...(babelOptions.presets || []),
