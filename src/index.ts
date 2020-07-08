@@ -80,6 +80,7 @@ export async function build({ out, options, reporter }: BuilderOptions): Promise
                     ],
                     ...(babelOptions.plugins || []),
                 ],
+                ...(babelOptions.options || {}),
             }),
             options.minify !== false
                 ? rollupTerser(typeof options.minify === "object" ? options.minify : undefined)
