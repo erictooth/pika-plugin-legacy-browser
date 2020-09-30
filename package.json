@@ -1,6 +1,6 @@
 {
     "name": "pika-plugin-legacy-browser",
-    "version": "1.5.0",
+    "version": "2.0.0-alpha.0",
     "description": "A @pika/pack plugin: Adds a bundled IIFE distribution to your package, built to run on modern and legacy browsers.",
     "scripts": {
         "test": "cd test && npm t",
@@ -24,11 +24,11 @@
         "@rollup/plugin-node-resolve": "^6.0.0",
         "@types/node": "^12.12.14",
         "babel-plugin-transform-define": "^2.0.0",
-        "rollup": "^1.27.8",
+        "rollup": "^2.28.2",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-sourcemaps": "^0.4.2",
-        "rollup-plugin-terser": "^5.1.2"
+        "rollup-plugin-sourcemaps": "^0.6.2",
+        "rollup-plugin-terser": "^7.0.2"
     },
     "devDependencies": {
         "@erictooth/prettier-config": "^2.0.0",
