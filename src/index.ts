@@ -33,7 +33,7 @@ export async function beforeJob({ out }: BuilderOptions) {
 }
 
 export async function build({ out, options, reporter }: BuilderOptions): Promise<void> {
-    const writePath = path.join(out, "dist-browser", "index.js");
+    const writePath = path.join(out, "dist-browser", options.minify ? "index.min.js" : "index.js");
 
     const babelOptions = options.babel || {};
 
